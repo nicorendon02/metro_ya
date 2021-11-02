@@ -343,5 +343,58 @@ public class Node {
         }
     }
 
-    public void calculateDiscount(){}
+    public String calculateDiscount(int userId) throws DataNotFoundException
+    {
+        float discount = 0;
+        if(this.getData().getIdentification() == userId)
+        {
+            if(this.getLeft() != null)
+            {
+                discount = discount + 5;
+                if(this.getLeft().getLeft() != null)
+                {
+                    discount = discount + 2.5f;
+                }
+                if(this.getLeft().getRight() != null)
+                {
+                    discount = discount + 2.5f;
+                }
+            }
+            if(this.getRight() != null)
+            {
+                discount = discount + 5;
+                if(this.getRight().getLeft() != null)
+                {
+                    discount = discount + 2.5f;
+                }
+                if(this.getRight().getRight() != null)
+                {
+                    discount = discount + 2.5f;
+                }
+            }
+        }
+        else if(userId < this.getData().getIdentification())
+        {
+            if(this.getLeft() != null)
+            {
+                this.getLeft().calculateDiscount(userId);
+            }
+            else
+            {
+                throw new DataNotFoundException("This User does not exist!");
+            }
+        }
+        else
+        {
+            if(this.getRight() != null)
+            {
+                this.getRight().calculateDiscount(userId);
+            }
+            else
+            {
+                throw new DataNotFoundException("This User does not exist!");
+            }
+        }
+        return "This User has a discount of "+discount+"%";
+    }
 }

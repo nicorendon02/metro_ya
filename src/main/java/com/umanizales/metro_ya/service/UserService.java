@@ -86,4 +86,11 @@ public class UserService {
         return new ResponseEntity<>(new ResponseBinaryTreeDto(true, "successful",
                 null),HttpStatus.OK);
     }
+
+    // ResponseEntity to find the father of a certain Boy' ID
+    public ResponseEntity<ResponseBinaryTreeDto> calculateDiscount(int userId) throws DataNotFoundException
+    {
+        return new ResponseEntity<>(new ResponseBinaryTreeDto(true, users.calculateDiscount(userId),
+                null),HttpStatus.OK);
+    }
 }

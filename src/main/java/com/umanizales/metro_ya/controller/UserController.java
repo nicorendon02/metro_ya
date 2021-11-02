@@ -88,7 +88,14 @@ public class UserController {
     // find the father of a certain Boy' ID
     @GetMapping("/deleteById/{idToDelete}")
     public @ResponseBody
-    ResponseEntity<?> deleteBoy(@PathVariable int idToDelete) throws DataNotFoundException {
+    ResponseEntity<?> deleteReferred(@PathVariable int idToDelete) throws DataNotFoundException {
         return userService.deleteReferred(idToDelete);
+    }
+
+    // find the father of a certain Boy' ID
+    @GetMapping("/discount/{userId}")
+    public @ResponseBody
+    ResponseEntity<?> calculateDiscount(@PathVariable int userId) throws DataNotFoundException {
+        return userService.calculateDiscount(userId);
     }
 }

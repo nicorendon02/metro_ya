@@ -112,4 +112,16 @@ public class BinaryTree {
             throw new DataNotFoundException("There are no Users yet");
         }
     }
+
+    public String calculateDiscount(int userId) throws DataNotFoundException
+    {
+        if(root == null)
+        {
+            throw new DataNotFoundException("There are no Users yet");
+        }
+        else
+        {
+            return root.calculateDiscount(userId);
+        }
+    }
 }
