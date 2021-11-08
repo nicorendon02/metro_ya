@@ -22,6 +22,19 @@ public class UserService {
     // Activate the process by creating the Tree!!
     private BinaryTree users = new BinaryTree();
 
+    // ResponseEntity to fill the Tree with a List of Boys
+    public ResponseEntity<ResponseBinaryTreeDto> fillTreeUsers(List<User> boys) throws BinaryTreeException
+    {
+        // for each Boy in the List...
+        for(User boy:boys)
+        {
+            // add Boy to the Tree
+            users.addUser(boy);
+        }
+        return new ResponseEntity<>(new ResponseBinaryTreeDto(true,"successful",
+                null),HttpStatus.OK);
+    }
+
     // ResponseEntity for addUser method
     public ResponseEntity<ResponseBinaryTreeDto> addUser(User user) throws BinaryTreeException
     {
@@ -41,29 +54,15 @@ public class UserService {
     }
 
     // ResponseEntity for addReferred method
-    public ResponseEntity<ResponseBinaryTreeDto> addReferred(int option, User referredData)
+    public ResponseEntity<ResponseBinaryTreeDto> addReferred(int fatherId, User referredData)
             throws BinaryTreeException,DataNotFoundException
     {
-        Node referred = new Node(referredData);
         // call the method in binaryTree
-        users.addReferred(option,referred);
+        users.addReferred(fatherId,referredData);
 
-        return new ResponseEntity<>(new ResponseBinaryTreeDto(referredData,"Successful!",
+        return new ResponseEntity<>(new ResponseBinaryTreeDto(true,"Successful!",
                 null),HttpStatus.OK);
 
-    }
-
-    // ResponseEntity to fill the Tree with a List of Boys
-    public ResponseEntity<ResponseBinaryTreeDto> fillTreeUsers(List<User> boys) throws BinaryTreeException
-    {
-        // for each Boy in the List...
-        for(User boy:boys)
-        {
-            // add Boy to the Tree
-            users.addUser(boy);
-        }
-        return new ResponseEntity<>(new ResponseBinaryTreeDto(true,"successful",
-                null),HttpStatus.OK);
     }
 
     // ResponseEntity for addReferred method
@@ -90,7 +89,8 @@ public class UserService {
     // ResponseEntity to find the father of a certain Boy' ID
     public ResponseEntity<ResponseBinaryTreeDto> calculateDiscount(int userId) throws DataNotFoundException
     {
-        return new ResponseEntity<>(new ResponseBinaryTreeDto(true, users.calculateDiscount(userId),
+        return new ResponseEntity<>(new ResponseBinaryTreeDto(true,
+                "This User has a discount of "+users.calculateDiscount(userId)+"%",
                 null),HttpStatus.OK);
     }
 }

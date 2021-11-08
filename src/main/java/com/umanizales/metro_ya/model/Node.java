@@ -127,24 +127,24 @@ public class Node {
     }
 
     // Method to add a new Referred to the Binary Tree
-    public void addReferred(int fatherId, Node referredData) throws BinaryTreeException, DataNotFoundException
+    public void addReferred(int fatherId, User referredData) throws BinaryTreeException, DataNotFoundException
     {
         if(this.getData().getIdentification() == fatherId)
         {
-            if(referredData.getData().getIdentification() < fatherId)
+            if(referredData.getIdentification() < fatherId)
             {
                 if(this.getLeft() != null)
                 {
                     throw new BinaryTreeException("This User already has a referred assigned!");
                 }
-                this.setLeft(referredData);
+                this.setLeft(new Node(referredData));
 
             }
             if(this.getRight() != null)
             {
                 throw new BinaryTreeException("This User already has a referred assigned!");
             }
-            this.setRight(referredData);
+            this.setRight(new Node(referredData));
         }
         else
         {
@@ -343,58 +343,48 @@ public class Node {
         }
     }
 
-    public String calculateDiscount(int userId) throws DataNotFoundException
+
+    public int calculateDiscount(int userId) throws DataNotFoundException
     {
-        float discount = 0;
-        if(this.getData().getIdentification() == userId)
-        {
-            if(this.getLeft() != null)
-            {
-                discount = discount + 5;
-                if(this.getLeft().getLeft() != null)
-                {
-                    discount = discount + 2.5f;
+        int discount = 0;
+        if(this.getData().getIdentification() == userId) {
+            if (this.getLeft() != null) {
+                discount = discount + 6;
+                if (this.getLeft().getLeft() != null) {
+                    discount = discount + 2;
                 }
-                if(this.getLeft().getRight() != null)
-                {
-                    discount = discount + 2.5f;
+                if (this.getLeft().getRight() != null) {
+                    discount = discount + 2;
                 }
             }
-            if(this.getRight() != null)
-            {
-                discount = discount + 5;
-                if(this.getRight().getLeft() != null)
-                {
-                    discount = discount + 2.5f;
+            if (this.getRight() != null) {
+                discount = discount + 6;
+                if (this.getRight().getLeft() != null) {
+                    discount = discount + 2;
                 }
-                if(this.getRight().getRight() != null)
-                {
-                    discount = discount + 2.5f;
+                if (this.getRight().getRight() != null) {
+                    discount = discount + 2;
                 }
             }
+
         }
-        else if(userId < this.getData().getIdentification())
-        {
-            if(this.getLeft() != null)
-            {
-                this.getLeft().calculateDiscount(userId);
-            }
-            else
-            {
-                throw new DataNotFoundException("This User does not exist!");
-            }
-        }
+
         else
         {
-            if(this.getRight() != null)
-            {
-                this.getRight().calculateDiscount(userId);
+                if (userId < this.getData().getIdentification()) {
+                    if (this.getLeft() != null) {
+                        discount = discount + this.getLeft().calculateDiscount(userId);
+                    } else {
+                        throw new DataNotFoundException("This User ID does not exist!");
+                    }
+                } else {
+                    if (this.getRight() != null) {
+                        discount = discount + this.getRight().calculateDiscount(userId);
+                    } else {
+                        throw new DataNotFoundException("This User ID does not exist!");
+                    }
+                }
             }
-            else
-            {
-                throw new DataNotFoundException("This User does not exist!");
-            }
-        }
-        return "This User has a discount of "+discount+"%";
+        return discount;
     }
 }

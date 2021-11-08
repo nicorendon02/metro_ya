@@ -57,7 +57,7 @@ public class BinaryTree {
         }
     }
 
-    public void addReferred(int option, Node referredData) throws BinaryTreeException,
+    public void addReferred(int fatherId, User referredData) throws BinaryTreeException,
             DataNotFoundException
     {
         if(root == null)
@@ -66,17 +66,10 @@ public class BinaryTree {
         }
         else
         {
-            // Call to a certain method according to an Option...
-            switch (option) {
-                case 1:
-                    root.addReferred(12,referredData);
-                    break;
-                case 2:
-                    root.addReferred(72,referredData);
-                    break;
-            }
+            root.addReferred(fatherId,referredData);
         }
     }
+
 
     public void modifyReferred(int option, Node newData) throws DataNotFoundException
     {
@@ -113,7 +106,7 @@ public class BinaryTree {
         }
     }
 
-    public String calculateDiscount(int userId) throws DataNotFoundException
+    public int calculateDiscount(int userId) throws DataNotFoundException
     {
         if(root == null)
         {
