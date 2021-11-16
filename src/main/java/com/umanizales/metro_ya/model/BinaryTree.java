@@ -71,7 +71,8 @@ public class BinaryTree {
     }
 
 
-    public void modifyReferred(int option, Node newData) throws DataNotFoundException
+    public void modifyReferred(int referredId, User newData) throws DataNotFoundException,
+            BinaryTreeException
     {
         if(root == null)
         {
@@ -79,15 +80,7 @@ public class BinaryTree {
         }
         else
         {
-            // Call to a certain method according to an Option...
-            switch (option) {
-                case 1:
-                    root.modifyReferred(23,newData);
-                    break;
-                case 2:
-                    root.modifyReferred(72,newData);
-                    break;
-            }
+            root.modifyReferred(referredId,newData);
         }
     }
 

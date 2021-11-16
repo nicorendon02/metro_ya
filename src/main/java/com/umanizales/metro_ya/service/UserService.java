@@ -65,14 +65,11 @@ public class UserService {
 
     }
 
-    // ResponseEntity for addReferred method
-    public ResponseEntity<ResponseBinaryTreeDto> modifyReferred(int option, User newData)
-            throws BinaryTreeException,DataNotFoundException
+    // ResponseEntity for modifyReferred method
+    public ResponseEntity<ResponseBinaryTreeDto> modifyReferred(int referredId, User newData)
+            throws DataNotFoundException, BinaryTreeException
     {
-        Node referred = new Node(newData);
-        // call the method in binaryTree
-        users.modifyReferred(option,referred);
-
+        users.modifyReferred(referredId,newData);
         return new ResponseEntity<>(new ResponseBinaryTreeDto(true,"Successful!",
                 null),HttpStatus.OK);
 

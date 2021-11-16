@@ -174,16 +174,32 @@ public class Node {
     }
 
     // Method to change a Referred data
-    public void modifyReferred(int referredId, Node newData) throws DataNotFoundException
+    public void modifyReferred(int referredId, User newData) throws DataNotFoundException,
+            BinaryTreeException
     {
-        if(referredId < this.getData().getIdentification())
+        if(this.getData().getIdentification() == referredId)
+        {
+            if(!this.checkUserExistence(newData.getIdentification())) {
+                this.setData(newData);
+            }
+            else
+            {
+                throw new BinaryTreeException("A User with that ID already exists!");
+            }
+        }
+        else if(referredId < this.getData().getIdentification())
         {
             if(this.getLeft() != null)
             {
                 if(this.getLeft().getData().getIdentification() == referredId)
                 {
-                    //Node temp = new Node(this.getLeft().getLeft().getData());
-                    this.setLeft(newData);
+                    if(!this.checkUserExistence(newData.getIdentification())) {
+                        this.getLeft().setData(newData);
+                    }
+                    else
+                    {
+                        throw new BinaryTreeException("A User with that ID already exists!");
+                    }
                 }
                 else
                 {
@@ -192,7 +208,7 @@ public class Node {
             }
             else
             {
-                throw new DataNotFoundException("The Referred does not exist!");
+                throw new DataNotFoundException("This Referred does not exist!");
             }
         }
         else
@@ -201,7 +217,13 @@ public class Node {
             {
                 if(this.getRight().getData().getIdentification() == referredId)
                 {
-                    this.setRight(newData);
+                    if(!this.checkUserExistence(newData.getIdentification())) {
+                        this.getRight().setData(newData);
+                    }
+                    else
+                    {
+                        throw new BinaryTreeException("A User with that ID already exists!");
+                    }
                 }
                 else
                 {
@@ -210,9 +232,32 @@ public class Node {
             }
             else
             {
-                throw new DataNotFoundException("The Referred does not exist!");
+                throw new DataNotFoundException("This Referred does not exist!");
             }
         }
+    }
+
+    public boolean checkUserExistence(int userId)
+    {
+        if(this.getData().getIdentification() == userId)
+        {
+            return true;
+        }
+        else if(userId < this.getData().getIdentification())
+        {
+            if(this.getLeft() != null)
+            {
+                return this.getLeft().checkUserExistence(userId);
+            }
+        }
+        else
+        {
+            if(this.getRight() != null)
+            {
+                return this.getRight().checkUserExistence(userId);
+            }
+        }
+        return false;
     }
 
     // validate if the Node is a Leaf

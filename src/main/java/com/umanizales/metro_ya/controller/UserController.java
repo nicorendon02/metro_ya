@@ -1,5 +1,6 @@
 package com.umanizales.metro_ya.controller;
 
+import com.umanizales.metro_ya.controller.dto.ModifyReferredDTO;
 import com.umanizales.metro_ya.exception.BinaryTreeException;
 import com.umanizales.metro_ya.exception.DataNotFoundException;
 import com.umanizales.metro_ya.model.Node;
@@ -64,10 +65,10 @@ public class UserController {
 
     @PostMapping("/modifyReferred")
     public @ResponseBody
-    ResponseEntity<?> modifyReferred1(@Valid @RequestBody User newData)
-            throws BinaryTreeException, DataNotFoundException
+    ResponseEntity<?> modifyReferred(@Valid @RequestBody ModifyReferredDTO boy)
+            throws DataNotFoundException, BinaryTreeException
     {
-        return userService.modifyReferred(1,newData);
+        return userService.modifyReferred(boy.getReferredId(),boy.getNewData());
     }
 
     // find the father of a certain Boy' ID
