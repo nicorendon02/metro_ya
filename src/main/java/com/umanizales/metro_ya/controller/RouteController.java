@@ -1,8 +1,9 @@
 package com.umanizales.metro_ya.controller;
 
-import com.umanizales.metro_ya.controller.dto.BoyWithParentDTO;
+import com.umanizales.metro_ya.controller.dto.RouteWithParentDTO;
 import com.umanizales.metro_ya.exception.DataNotFoundException;
 import com.umanizales.metro_ya.exception.NTreeException;
+import com.umanizales.metro_ya.model.Route;
 import com.umanizales.metro_ya.model.User;
 import com.umanizales.metro_ya.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "ntree")
@@ -20,23 +22,23 @@ public class RouteController {
     @Autowired
     private RouteService nTreeService;
 
-    @PostMapping("/{parentIdentification}")
+    @PostMapping("/add")
     public @ResponseBody
-    ResponseEntity<?> addBoy(@Valid @RequestBody User boy, @PathVariable int parentIdentification)
+    ResponseEntity<?> addRoute(@Valid @RequestBody RouteWithParentDTO newRoute)
             throws DataNotFoundException, NTreeException {
-        return nTreeService.addBoy(boy,parentIdentification);
+        return nTreeService.addRoute(newRoute.getRoute(), newRoute.getParentId());
     }
 
     @PostMapping("/fill")
     public @ResponseBody
-    ResponseEntity<?> fillTree(BoyWithParentDTO data)
+    ResponseEntity<?> fillRoutes(@RequestBody List<RouteWithParentDTO> routes)
             throws DataNotFoundException, NTreeException {
-        return nTreeService.addBoy(data.getBoy(),data.getParentId());
+        return nTreeService.fillRoutes(routes);
     }
 
     @GetMapping("/list")
     public @ResponseBody
-    ResponseEntity<?> listBoys() throws NTreeException {
-        return nTreeService.listBoys();
+    ResponseEntity<?> listRoutes() throws NTreeException {
+        return nTreeService.listRoutes();
     }
 }

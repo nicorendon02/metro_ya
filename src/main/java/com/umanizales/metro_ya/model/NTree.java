@@ -14,7 +14,7 @@ public class NTree {
     private NNode root;
     private int count;
 
-    public void add(User child, int parentIdentification) throws NTreeException, DataNotFoundException
+    public void add(Route child, int parentIdentification) throws NTreeException, DataNotFoundException
     {
         if(root==null)
         {
@@ -27,23 +27,16 @@ public class NTree {
             {
                 throw  new DataNotFoundException("No existe un nodo con la identificación "+parentIdentification);
             }
-            NNode childFind= root.findNTreeByIdentification(child.getIdentification());
+            NNode childFind= root.findNTreeByIdentification(child.getCode());
             if(childFind!=null)
             {
-                throw  new NTreeException("Ya existe un nodo con la identificación "+child.getIdentification());
+                throw  new NTreeException("Ya existe un nodo con la identificación "+child.getCode());
             }
             if(parent.getChildren()==null)
                 parent.setChildren(new ArrayList<>());
             parent.getChildren().add(new NNode(child));
         }
     }
-    /*
-    public NNode findNTreeByIdentification(int identification) throws DataNotFoundException,NTreeException
-    {
-        validateNtreeEmpty();
-    }
-    *
-     */
 
     public void validateNtreeEmpty() throws NTreeException
     {
@@ -52,10 +45,10 @@ public class NTree {
     }
 
 
-    public List<User> listBoys() throws NTreeException
+    public List<Route> listRoutes() throws NTreeException
     {
         validateNtreeEmpty();
-        return root.listBoys(new ArrayList<User>());
+        return root.listRoutes(new ArrayList<Route>());
     }
 
 }

@@ -12,13 +12,14 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 
 public class Route {
+    @NotNull
+    @Positive
+    private int code;
     @NotBlank
     private String origin;
     @NotBlank
     private String destination;
     @NotNull
     @Positive
-    private int code;
-    private float duration;
-    private float price;
+    private int price;
 }

@@ -10,10 +10,10 @@ import java.util.List;
 
 @Data
 public class NNode {
-    private User data;
+    private Route data;
     private List<NNode> children;
 
-    public NNode(User data) {
+    public NNode(Route data) {
         this.data = data;
 
     }
@@ -21,7 +21,7 @@ public class NNode {
 
     public NNode findNTreeByIdentification(int identification)
     {
-        if(this.getData().getIdentification()==identification)
+        if(this.getData().getCode()==identification)
         {
             return this;
         }
@@ -41,14 +41,14 @@ public class NNode {
 
     }
 
-    public List<User> listBoys(List<User> listBoys)
+    public List<Route> listRoutes(List<Route> listRoutes)
     {
-        listBoys.add(this.getData());
+        listRoutes.add(this.getData());
         if(this.children != null) {
             for (NNode boy : this.children) {
-                boy.listBoys(listBoys);
+                boy.listRoutes(listRoutes);
             }
         }
-        return listBoys;
+        return listRoutes;
     }
 }
