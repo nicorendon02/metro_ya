@@ -5,17 +5,50 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-// using the Lombok Annotations
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
-@NoArgsConstructor
-
 public class NNode {
-    private Route data;
-    private List<Node> children;
+    private User data;
+    private List<NNode> children;
 
-    public void addRoute(){}
+    public NNode(User data) {
+        this.data = data;
 
-    public void listRoutes(){}
+    }
 
-    public void deleteRoute(){}
+
+    public NNode findNTreeByIdentification(int identification)
+    {
+        if(this.getData().getIdentification()==identification)
+        {
+            return this;
+        }
+        else
+        {
+            if(this.children!=null) {
+                for (NNode child : children) {
+                    NNode nodeFind = child.findNTreeByIdentification(identification);
+                    if (nodeFind != null) {
+                        return nodeFind;
+                    }
+                }
+            }
+
+        }
+        return null;
+
+    }
+
+    public List<User> listBoys(List<User> listBoys)
+    {
+        listBoys.add(this.getData());
+        if(this.children != null) {
+            for (NNode boy : this.children) {
+                boy.listBoys(listBoys);
+            }
+        }
+        return listBoys;
+    }
 }
