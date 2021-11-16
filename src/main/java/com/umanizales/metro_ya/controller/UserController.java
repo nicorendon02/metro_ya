@@ -74,7 +74,8 @@ public class UserController {
     // find the father of a certain Boy' ID
     @GetMapping("/deleteById/{idToDelete}")
     public @ResponseBody
-    ResponseEntity<?> deleteReferred(@PathVariable int idToDelete) throws DataNotFoundException {
+    ResponseEntity<?> deleteReferred(@PathVariable int idToDelete)
+            throws DataNotFoundException, BinaryTreeException {
         return userService.deleteReferred(idToDelete);
     }
 

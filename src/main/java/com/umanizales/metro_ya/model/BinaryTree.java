@@ -85,13 +85,21 @@ public class BinaryTree {
     }
 
     // Method to delete a Boy by ID
-    public void deleteReferred(int idToDelete) throws DataNotFoundException
+    public void deleteBoy(int idToDelete) throws DataNotFoundException, BinaryTreeException
     {
         // if the root has something
         if(root != null)
         {
-            root.deleteReferred(idToDelete);
-
+            // if root is the Boy to delete
+            if(root.getData().getIdentification() == idToDelete)
+            {
+                throw new BinaryTreeException("This User cannot be deleted");
+            }
+            // if root is not the Boy to delete
+            else
+            {
+                root.deleteBoy(idToDelete);
+            }
         }
         else
         {

@@ -281,7 +281,7 @@ public class Node {
 
 
     // Method to delete a Boy by ID
-    public void deleteReferred(int idToDelete) throws DataNotFoundException
+    public void deleteBoy(int idToDelete) throws DataNotFoundException
     {
         // if idToDelete < current ID
         if(idToDelete < this.data.getIdentification())
@@ -316,7 +316,7 @@ public class Node {
                         // my Left child's Left finds his LargestBoy to capture the data
                         User dataTransfer = this.getLeft().getLeft().findLargestId();
                         // my Left child deletes that largestBoy
-                        this.getLeft().deleteReferred(dataTransfer.getIdentification());
+                        this.getLeft().deleteBoy(dataTransfer.getIdentification());
                         // replace my Left child's data with dataTransfer
                         this.getLeft().setData(dataTransfer);
                     }
@@ -325,13 +325,13 @@ public class Node {
                 else
                 {
                     // move to the Left and ask again
-                    this.getLeft().deleteReferred(idToDelete);
+                    this.getLeft().deleteBoy(idToDelete);
                 }
             }
             // if the Method couldn't find the Boy to delete...
             else
             {
-                throw new DataNotFoundException("This Boy does not exist");
+                throw new DataNotFoundException("This User does not exist");
             }
         }
         // if idToDelete > current ID
@@ -368,7 +368,7 @@ public class Node {
                         // my Right child's Left finds his largestBoy to capture
                         User dataTransfer = this.getRight().getLeft().findLargestId();
                         // my Right child deletes that largestBoy
-                        this.getRight().deleteReferred(dataTransfer.getIdentification());
+                        this.getRight().deleteBoy(dataTransfer.getIdentification());
                         // replace my Right child's data with dataTransfer
                         this.getRight().setData(dataTransfer);
                     }
@@ -377,13 +377,13 @@ public class Node {
                 else
                 {
                     // move to the Right and ask again
-                    this.getRight().deleteReferred(idToDelete);
+                    this.getRight().deleteBoy(idToDelete);
                 }
             }
             // if the Method couldn't find the Boy to delete...
             else
             {
-                throw new DataNotFoundException("This Boy does not exist");
+                throw new DataNotFoundException("This User does not exist");
             }
         }
     }

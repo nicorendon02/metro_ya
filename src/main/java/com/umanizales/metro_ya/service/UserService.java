@@ -76,9 +76,10 @@ public class UserService {
     }
 
     // ResponseEntity to find the father of a certain Boy' ID
-    public ResponseEntity<ResponseBinaryTreeDto> deleteReferred(int idToDelete) throws DataNotFoundException
+    public ResponseEntity<ResponseBinaryTreeDto> deleteReferred(int idToDelete)
+            throws DataNotFoundException, BinaryTreeException
     {
-        users.deleteReferred(idToDelete);
+        users.deleteBoy(idToDelete);
         return new ResponseEntity<>(new ResponseBinaryTreeDto(true, "successful",
                 null),HttpStatus.OK);
     }
