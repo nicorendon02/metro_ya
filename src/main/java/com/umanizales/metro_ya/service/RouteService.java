@@ -49,4 +49,12 @@ public class RouteService {
                 ,HttpStatus.OK
         );
     }
+
+    public ResponseEntity<ResponseBinaryTreeDto> printTreeWithChildren() throws DataNotFoundException
+    {
+        return new ResponseEntity<ResponseBinaryTreeDto>(
+                new ResponseBinaryTreeDto(nTree.printTreeWithChildren(),"Successful!",
+                        null),HttpStatus.OK
+        );
+    }
 }

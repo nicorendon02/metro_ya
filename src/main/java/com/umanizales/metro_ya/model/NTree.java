@@ -51,4 +51,14 @@ public class NTree {
         return root.listRoutes(new ArrayList<Route>());
     }
 
+    public NNode printTreeWithChildren() throws DataNotFoundException
+    {
+        if(root == null)
+        {
+            throw new DataNotFoundException("There are no Routes yet");
+        }
+        else {
+            return root.printTreeWithChildren();
+        }
+    }
 }

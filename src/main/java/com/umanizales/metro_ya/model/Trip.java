@@ -1,7 +1,9 @@
 package com.umanizales.metro_ya.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 // using the Lombok Annotations
@@ -17,7 +19,13 @@ public class Trip {
     private float price;
     private List<Ticket> tickets;
 
-    public void buyTrip(){}
+    private Node node;
+    private NNode nNode;
+
+    public void buyTrip(int userId, int routeId)
+    {
+        node.checkUserExistence(userId);
+    }
 
     //public List<Trip> listTrips(){}
 

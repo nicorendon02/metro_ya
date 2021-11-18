@@ -41,4 +41,10 @@ public class RouteController {
     ResponseEntity<?> listRoutes() throws NTreeException {
         return nTreeService.listRoutes();
     }
+
+    @GetMapping("/print")
+    public @ResponseBody
+    ResponseEntity<?> printTreeWithChildren() throws DataNotFoundException {
+        return nTreeService.printTreeWithChildren();
+    }
 }

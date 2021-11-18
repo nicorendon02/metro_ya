@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class Train {
     private int identification;
     private int capacity;
+
+
 }

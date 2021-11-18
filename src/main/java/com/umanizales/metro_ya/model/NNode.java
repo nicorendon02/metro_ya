@@ -51,4 +51,9 @@ public class NNode {
         }
         return listRoutes;
     }
+
+    public NNode printTreeWithChildren()
+    {
+        return this;
+    }
 }
