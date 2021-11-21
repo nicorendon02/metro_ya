@@ -118,4 +118,13 @@ public class BinaryTree {
             return root.calculateDiscount(userId);
         }
     }
+
+    public User checkUserExistences(int userId) throws DataNotFoundException
+    {
+        if(root != null)
+        {
+            return root.checkUserExistences(userId);
+        }
+        throw new DataNotFoundException("There are no Users yet");
+    }
 }

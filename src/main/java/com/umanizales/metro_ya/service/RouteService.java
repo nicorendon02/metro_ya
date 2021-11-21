@@ -5,6 +5,7 @@ import com.umanizales.metro_ya.controller.dto.RouteWithParentDTO;
 import com.umanizales.metro_ya.exception.BinaryTreeException;
 import com.umanizales.metro_ya.exception.DataNotFoundException;
 import com.umanizales.metro_ya.exception.NTreeException;
+import com.umanizales.metro_ya.model.NNode;
 import com.umanizales.metro_ya.model.NTree;
 import com.umanizales.metro_ya.model.Route;
 import com.umanizales.metro_ya.model.User;
@@ -57,4 +58,10 @@ public class RouteService {
                         null),HttpStatus.OK
         );
     }
+
+    public NNode findRouteById(int idFind) throws DataNotFoundException
+    {
+        return nTree.findNTreeByIdentification(idFind);
+    }
+
 }

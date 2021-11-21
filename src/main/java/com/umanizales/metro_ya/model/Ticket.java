@@ -1,5 +1,6 @@
 package com.umanizales.metro_ya.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,17 +10,17 @@ import javax.validation.constraints.Positive;
 
 // using the Lombok Annotations
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 
 public class Ticket {
     @Positive
     @NotNull
-    private int num;
+    private double num;
     @Positive
     @NotNull
-    private int seat;
+    private double seat;
     @Positive
     @NotEmpty
-    private float price;
-    private User holder;
+    private double price;
+    private String holder;
 }

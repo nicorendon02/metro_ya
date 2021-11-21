@@ -61,4 +61,9 @@ public class NTree {
             return root.printTreeWithChildren();
         }
     }
+
+    public NNode findNTreeByIdentification(int identification)
+    {
+        return root.findNTreeByIdentification(identification);
+    }
 }

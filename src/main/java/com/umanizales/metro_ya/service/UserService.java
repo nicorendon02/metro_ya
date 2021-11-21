@@ -91,4 +91,14 @@ public class UserService {
                 "This User has a discount of "+users.calculateDiscount(userId)+"%",
                 null),HttpStatus.OK);
     }
+
+    public User checkUserExistences(int userId) throws DataNotFoundException
+    {
+        return users.checkUserExistences(userId);
+    }
+
+    public int calculateDiscounts(int userId) throws DataNotFoundException
+    {
+        return users.calculateDiscount(userId);
+    }
 }

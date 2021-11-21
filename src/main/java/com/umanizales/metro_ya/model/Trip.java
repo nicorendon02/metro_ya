@@ -8,28 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 // using the Lombok Annotations
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 
 public class Trip {
-    private Route route;
+    private int identification;
+    private NNode route;
     private Train train;
-    private String state;
-    private String date;
-    private String time;
     private float price;
     private List<Ticket> tickets;
 
-    private Node node;
-    private NNode nNode;
-
-    public void buyTrip(int userId, int routeId)
-    {
-        node.checkUserExistence(userId);
-    }
-
-    //public List<Trip> listTrips(){}
-
-    public void cancelTrip(){}
-
-    //public float calculateTripPrice(){}
 }

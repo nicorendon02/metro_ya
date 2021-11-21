@@ -260,6 +260,29 @@ public class Node {
         return false;
     }
 
+    public User checkUserExistences(int userId) throws DataNotFoundException
+    {
+        if(this.getData().getIdentification() == userId)
+        {
+            return this.getData();
+        }
+        else if(userId < this.getData().getIdentification())
+        {
+            if(this.getLeft() != null)
+            {
+                return this.getLeft().checkUserExistences(userId);
+            }
+        }
+        else
+        {
+            if(this.getRight() != null)
+            {
+                return this.getRight().checkUserExistences(userId);
+            }
+        }
+        throw new DataNotFoundException("The User was not found");
+    }
+
     // validate if the Node is a Leaf
     public boolean isLeaf()
     {
